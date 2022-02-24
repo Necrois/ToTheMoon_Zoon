@@ -1,6 +1,6 @@
 use crate::{
     app::{self, PageId},
-    calc_page, report_page,
+    calc_page, report_page, learning,
 };
 use std::collections::VecDeque;
 use zoon::{println, *};
@@ -61,6 +61,12 @@ pub fn router() -> &'static Router<Route> {
                 }
                 app::set_page_id(PageId::Login);
             }
+            Route::Learning => {
+                if app::is_user_logged() {
+                    return router().replace(Route::Root);
+                }
+                app::set_page_id(PageId::Learning);
+            }
             Route::CalcRoot => {
                 if let Some(expr) = calc_page::expression().get_cloned() {
                     return router().replace(expr.into_route());
@@ -96,6 +102,9 @@ pub enum Route {
 
     #[route("login")]
     Login,
+
+    #[route("learning")]
+    Learning,
 
     #[route("calc")]
     CalcRoot,

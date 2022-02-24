@@ -6,6 +6,8 @@ mod header;
 mod login_page;
 mod report_page;
 mod router;
+mod learning;
+
 
 // ------ ------
 //     Start

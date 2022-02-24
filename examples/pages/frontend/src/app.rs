@@ -3,6 +3,7 @@ use crate::{
     header::header,
     login_page, report_page,
     router::{previous_route, router, Route},
+    learning,
 };
 use zoon::*;
 
@@ -17,6 +18,7 @@ pub enum PageId {
     Calc,
     Home,
     Unknown,
+    Learning,
 }
 
 // ------ ------
@@ -78,5 +80,6 @@ fn page() -> impl Element {
         PageId::Calc => calc_page::page().into_raw_element(),
         PageId::Home => El::new().child("Welcome Home!").into_raw_element(),
         PageId::Unknown => El::new().child("404").into_raw_element(),
+        PageId::Learning => learning::page().into_raw_element(),
     }))
 }
